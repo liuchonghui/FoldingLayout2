@@ -109,7 +109,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="600px"
                 android:layout_below="@+id/data_footer_line"
-                android:background="#22002200" />
+                />
 
             <View
                 android:id="@+id/blank_footer_line"
@@ -130,7 +130,7 @@
                 android:layout_height="0dp"
                 android:layout_alignTop="@+id/title_header_line"
                 android:layout_alignBottom="@+id/blank_layout"
-                android:background="#339977ff" />
+                />
 
         </RelativeLayout>
     </ScrollView>
