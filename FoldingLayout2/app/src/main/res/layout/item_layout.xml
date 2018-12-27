@@ -13,7 +13,12 @@
         <FrameLayout
             android:id="@+id/blank_space"
             android:layout_width="match_parent"
-            android:layout_height="0dp">
+            android:layout_height="wrap_content"
+            android:visibility="invisible">
+            <include
+                layout="@layout/top_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
         </FrameLayout>
 
         <RelativeLayout

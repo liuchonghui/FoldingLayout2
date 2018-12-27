@@ -1,9 +1,11 @@
 package android.test.foldinglayout2;
 
 import android.content.Context;
+import android.graphics.Rect;
 import android.support.v4.view.PreviewViewPager;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewConfiguration;
@@ -12,6 +14,7 @@ import android.widget.FrameLayout;
 public class FoldingLayout extends FrameLayout {
 
     protected PreviewViewPager mViewPager;
+    protected View topicLayout;
     private boolean finishInflate;
     private PreviewAdapter mAdapter;
     private PreviewPageTransformer transformer;
@@ -42,6 +45,31 @@ public class FoldingLayout extends FrameLayout {
 //        } finally {
 //            a.recycle();
 //        }
+    }
+
+    public void setTopicBlank(View topicLayout) {
+        this.topicLayout = topicLayout;
+    }
+
+    @Override
+    public boolean onInterceptTouchEvent(MotionEvent ev) {
+        if (withInAreaOf(topicLayout, ev.getRawX(), ev.getRawY())) {
+            return true;
+        }
+        return super.onInterceptTouchEvent(ev);
+    }
+
+    private boolean withInAreaOf(View topicLayout, float rawX, float rawY) {
+        int[] location = new int[2];
+        topicLayout.getLocationOnScreen(location);
+        Rect topicRect = new Rect(location[0], location[1],
+                location[0] + topicLayout.getMeasuredWidth(),
+                location[1] + topicLayout.getMeasuredHeight());
+        Log.d("PPP", "event[" + rawX + "|" + rawY + "]");
+        Log.d("PPP", "topicRect[" + topicRect + "]");
+        boolean contain = topicRect.contains((int) rawX, (int) rawY);
+        Log.d("PPP", "contain[" + contain + "]");
+        return contain;
     }
 
     @Override
